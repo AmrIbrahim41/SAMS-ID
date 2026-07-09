@@ -135,7 +135,7 @@
     </div>
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
 <script>
   const $=id=>document.getElementById(id);
   const bind=(input,out)=>{const el=$(input);el.addEventListener('input',()=>{$(out).textContent=el.value||' ';});};
@@ -149,12 +149,15 @@
   });
 
   function safe(s){return (s||'').trim().replace(/\s+/g,'-')||'card';}
-  function exportPNG(){
-    html2canvas($('card'),{scale:4,useCORS:true,imageTimeout:0,logging:false,backgroundColor:null}).then(cv=>{
+  async function exportPNG(){
+    const node=$('card'), opt={pixelRatio:3,cacheBust:true};
+    try{
+      await htmlToImage.toPng(node,opt);          // warm-up pass (loads images/fonts)
+      const url=await htmlToImage.toPng(node,opt); // crisp final render
       const a=document.createElement('a');
       a.download='SAMS-ID-'+safe($('nameEn').value)+'.png';
-      a.href=cv.toDataURL('image/png'); a.click();
-    });
+      a.href=url; a.click();
+    }catch(e){alert('حصل خطأ أثناء التصدير، حاول مرة أخرى');}
   }
 </script>
 </body>

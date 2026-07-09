@@ -93,12 +93,15 @@
     <button class="alt" onclick="exportPNG()">🖼️ تصدير صورة PNG</button>
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
 <script>
-  function exportPNG(){
-    html2canvas(document.getElementById('card'),{scale:4,useCORS:true,imageTimeout:0,logging:false,backgroundColor:null}).then(cv=>{
-      const a=document.createElement('a');a.download='SAMS-ID-Amr-Ibrahim.png';a.href=cv.toDataURL('image/png');a.click();
-    });
+  async function exportPNG(){
+    const node=document.getElementById('card'), opt={pixelRatio:3,cacheBust:true};
+    try{
+      await htmlToImage.toPng(node,opt);
+      const url=await htmlToImage.toPng(node,opt);
+      const a=document.createElement('a');a.download='SAMS-ID-Amr-Ibrahim.png';a.href=url;a.click();
+    }catch(e){alert('حصل خطأ أثناء التصدير، حاول مرة أخرى');}
   }
 </script>
 </body>
