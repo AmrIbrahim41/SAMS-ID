@@ -13,16 +13,16 @@
   body{font-family:'Cairo','Poppins',sans-serif;background:#e8eef5;display:flex;flex-direction:column;
     align-items:center;gap:22px;padding:40px 16px;min-height:100vh}
 
-  .card{width:340px;height:540px;position:relative;overflow:hidden;border-radius:26px;
+  .card{--accent:linear-gradient(135deg,var(--blue),var(--crimson));--accent2:#0081cc;width:340px;height:540px;position:relative;overflow:hidden;border-radius:26px;
     background:linear-gradient(170deg,#ffffff 0%,#f2f7fc 60%,#eaf2fb 100%);
     box-shadow:0 26px 60px rgba(22,39,61,.28);isolation:isolate}
   .card .header{position:absolute;top:0;left:0;right:0;height:180px;
     background:linear-gradient(135deg,var(--navy-2),var(--navy));border-radius:26px 26px 40px 40px;overflow:hidden}
-  .header::before{content:"";position:absolute;inset:0;
-    background:radial-gradient(120px 120px at 15% 10%,rgba(0,129,204,.55),transparent 60%),
-               radial-gradient(140px 140px at 90% 30%,rgba(217,0,70,.4),transparent 60%)}
+  .header::before{content:"";position:absolute;inset:0;opacity:.55;
+    background:radial-gradient(130px 130px at 15% 10%,var(--accent2),transparent 62%),
+               radial-gradient(150px 150px at 90% 30%,var(--accent2),transparent 62%)}
   .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:5px;
-    background:linear-gradient(90deg,var(--blue),var(--crimson))}
+    background:var(--accent)}
   .slot{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:74px;height:12px;
     background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.5);border-radius:20px;z-index:5}
 

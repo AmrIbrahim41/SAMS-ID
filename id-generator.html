@@ -38,12 +38,12 @@
   .note{font-size:12px;color:#8a99a8;margin-top:12px;line-height:1.6;text-align:center}
 
   .stage{position:sticky;top:20px;display:flex;justify-content:center}
-  .card{--accent:linear-gradient(135deg,var(--blue),var(--crimson));width:340px;height:540px;position:relative;overflow:hidden;border-radius:26px;
+  .card{--accent:linear-gradient(135deg,var(--blue),var(--crimson));--accent2:#0081cc;width:340px;height:540px;position:relative;overflow:hidden;border-radius:26px;
     background:linear-gradient(170deg,#ffffff 0%,#f2f7fc 60%,#eaf2fb 100%);
     box-shadow:0 26px 60px rgba(22,39,61,.28);isolation:isolate;flex:none}
   .card .header{position:absolute;top:0;left:0;right:0;height:180px;background:linear-gradient(135deg,var(--navy-2),var(--navy));border-radius:26px 26px 40px 40px;overflow:hidden}
-  .header::before{content:"";position:absolute;inset:0;background:radial-gradient(120px 120px at 15% 10%,rgba(0,129,204,.55),transparent 60%),radial-gradient(140px 140px at 90% 30%,rgba(217,0,70,.4),transparent 60%)}
-  .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--blue),var(--crimson))}
+  .header::before{content:"";position:absolute;inset:0;opacity:.55;background:radial-gradient(130px 130px at 15% 10%,var(--accent2),transparent 62%),radial-gradient(150px 150px at 90% 30%,var(--accent2),transparent 62%)}
+  .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--accent)}
   .slot{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:74px;height:12px;background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.5);border-radius:20px;z-index:5}
   .head-row{position:absolute;top:44px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:3}
   .badge{width:84px;height:84px;border-radius:50%;background:#fff;overflow:hidden;flex:none;box-shadow:0 6px 16px rgba(0,0,0,.25)}
@@ -135,20 +135,20 @@
 
   // team colors: first is the mixed (base) gradient, rest are solid single colors
   const accents=[
-    {n:'الأساسي',v:'linear-gradient(135deg,#0081cc,#d90046)'},
-    {n:'أحمر',v:'#d90046'},
-    {n:'أزرق',v:'#0081cc'},
-    {n:'أخضر',v:'#16a34a'},
-    {n:'بنفسجي',v:'#7c3aed'},
-    {n:'برتقالي',v:'#ea7317'},
-    {n:'تركوازي',v:'#0d9488'},
-    {n:'كحلي',v:'#16273d'}
+    {n:'الأساسي',v:'linear-gradient(135deg,#0081cc,#d90046)',c:'#0081cc'},
+    {n:'أحمر',v:'#d90046',c:'#d90046'},
+    {n:'أزرق',v:'#0081cc',c:'#0081cc'},
+    {n:'أخضر',v:'#16a34a',c:'#16a34a'},
+    {n:'بنفسجي',v:'#7c3aed',c:'#7c3aed'},
+    {n:'برتقالي',v:'#ea7317',c:'#ea7317'},
+    {n:'تركوازي',v:'#0d9488',c:'#0d9488'},
+    {n:'كحلي',v:'#16273d',c:'#16273d'}
   ];
   const swBox=$('swatches');
   accents.forEach((a,i)=>{
     const b=document.createElement('span');
     b.className='sw'+(i===0?' on':''); b.style.background=a.v; b.title=a.n;
-    b.onclick=()=>{document.querySelectorAll('.sw').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('card').style.setProperty('--accent',a.v);};
+    b.onclick=()=>{document.querySelectorAll('.sw').forEach(x=>x.classList.remove('on'));b.classList.add('on');const c=$('card');c.style.setProperty('--accent',a.v);c.style.setProperty('--accent2',a.c);};
     swBox.appendChild(b);
   });
 
